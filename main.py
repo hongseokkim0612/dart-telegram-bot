@@ -46,7 +46,11 @@ def main_loop():
         try:
             reports = get_dart_reports()
             for report in reports:
-                if "단일판매" in report['report_nm'] and report['rcept_no'] not in sent_reports:
+                if (
+    "단일판매" in report['report_nm']
+    or "공급계약체결" in report['report_nm']
+) and report['rcept_no'] not in sent_reports:
+
                     link = f"https://dart.fss.or.kr/dsaf001/main.do?rcpNo={report['rcept_no']}"
                     msg = (
                         f"📢 <b>{report['corp_name']}</b> 계약 공시\n"
